@@ -305,13 +305,14 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     baselines =['lsa','dsa','conditional','MCP','random','adaptive']
+    operators =['fgsm','jsma','bim-a','bim-b','cw-l2','scale','rotation','translation','shear','brightness','contrast']
 
     model_path='./model/densenet_cifar10.h5df'
 
-    for attack in ['fgsm','jsma','bim-a','bim-b','cw-l2','shear','rotation','brightness','contrast','scale','translation']: 
+    for operator in operators: 
 
         model=load_model(model_path)
-        npzfile=np.load('./adv/data/cifar/cifar_'+attack+'_compound8.npz')    
+        npzfile=np.load('./adv/data/cifar/cifar_'+operator+'_compound8.npz')    
         y_test= npzfile['y_test']
         x_test= npzfile['x_test']
   
@@ -324,18 +325,18 @@ if __name__ == "__main__":
         
         for measure in baselines:
             layer_names= ['activation_40']
-            resultfilename = './result/cifar_compound_'+attack+'.txt'
+            resultfilename = './result/cifar_compound_'+operator+'.txt'
             result_to_write='' 
             result_to_write+=measure+':\n'
             for selectsize in [100,300,500,1000]:             
                 result_to_write+='['
                 for i in range(5):
-                    print(attack)
+                    print(operator)
                     print(measure)
                     print(selectsize)
                     print(i)
                     model=load_model(model_path)
-                    retrain_acc = retrain(x_target,y_test,origin_acc,model, args,layer_names,selectsize,attack,measure)
+                    retrain_acc = retrain(x_target,y_test,origin_acc,model, args,layer_names,selectsize,operator,measure)
                     #print('%0.4f' % origin_acc, '%0.4f' % retrain_acc)
                     result_to_write+=str(round(retrain_acc,4))+('' if i==4 else ',')
                 result_to_write+='],\n'

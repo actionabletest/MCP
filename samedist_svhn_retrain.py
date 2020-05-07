@@ -332,11 +332,13 @@ if __name__ == "__main__":
     print(args)
 
     model_path='./model/model-svhn.h5df'
+    baselines =['lsa','dsa','conditional','MCP','random','adaptive']
+    operators =['fgsm','jsma','bim-a','bim-b','cw-l2','scale','rotation','translation','shear','brightness','contrast']
  
-    for attack in ['fgsm','jsma','bim-a','bim-b','cw-l2','scale','rotation','translation','shear','brightness','contrast']:  #,'bim-a','bim-b','cw-l2']:
+    for operator in operators:  #,'bim-a','bim-b','cw-l2']:
 
         model=load_model(model_path)
-        npzfile=np.load('./adv/data/svhn/svhn_'+attack+'compound8.npz')    
+        npzfile=np.load('./adv/data/svhn/svhn_'+operator+'compound8.npz')    
         y_test= npzfile['y_test']
         x_test= npzfile['x_test']
   
@@ -346,13 +348,13 @@ if __name__ == "__main__":
         score = model.evaluate(x_target, y_cat,verbose=0)
         origin_acc=score[1]
     #print('Test Loss: %.4f' % score[0])
-        print(attack)
+        print(operator)
         print('Before retrain, Test accuracy: %.4f'% origin_acc)
         for measure in ['lsa','dsa','conditional','MCP','random','adaptive']:
 
             layer_names= ['batch_normalization_16']
 
-            resultfilename = './result/svhn_compound_'+attack+'.txt'
+            resultfilename = './result/svhn_compound_'+operator+'.txt'
 
             result_to_write='' 
             result_to_write+=measure+':\n'
@@ -365,7 +367,7 @@ if __name__ == "__main__":
                     print(selectsize)
                     print(i)
                     model=load_model(model_path)
-                    retrain_acc = retrain(x_target,y_test,origin_acc,model, args,layer_names,selectsize,attack,measure)
+                    retrain_acc = retrain(x_target,y_test,origin_acc,model, args,layer_names,selectsize,operator,measure)
                     result_to_write+=str(round(retrain_acc,4))+('' if i==4 else ',')
                 result_to_write+='],\n'
 

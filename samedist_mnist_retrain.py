@@ -339,27 +339,19 @@ if __name__ == "__main__":
         default=True,
     )
     args = parser.parse_args()
-    assert args.d in ["mnist", "cifar"], "Dataset should be either 'mnist' or 'cifar'"
-    #assert args.lsa ^ args.dsa, "Select either 'lsa' or 'dsa'"
     print(args)
-    '''
-    import time
+    
+    baselines =['lsa','dsa','conditional','MCP','random','adaptive']
+    operators =['fgsm','jsma','bim-a','bim-b','cw-l2','scale','rotation','translation','shear','brightness','contrast']
 
-    starttime = time.time()
-    #time.sleep(2.1) #延时2.1s
-    endtime = time.time()
-    dtime = endtime - starttime
-
-    print("程序运行时间：%.8s s" % dtime)  #显示到微秒
-    '''
     model_path='./model/model_mnist.h5df'
 
-    for attack in ['fgsm','jsma','bim-a','bim-b','cw-l2','rotation','translation','shear','brightness','contrast','scale']:
+    for operator in operators:
         #createdataset(attack,8)
-        for measure in ['lsa','dsa','conditional','MCP','random','adaptive']:
+        for measure in baselines:
 
             layer_names= ['activation_11']
-            resultfilename = './result/mnist_compound_'+attack+'.txt'
+            resultfilename = './result/mnist_compound_'+operator+'.txt'
 
             origin_acc=0
             result_to_write='' 
@@ -368,12 +360,12 @@ if __name__ == "__main__":
 
                 result_to_write+='['
                 for i in range(5):
-                    print(attack)
+                    print(operator)
                     print(measure)
                     print(selectsize)
                     print(i)
                     model=load_model(model_path)
-                    retrain_acc,origin_acc = retrain(model, args,layer_names,selectsize,attack,measure)
+                    retrain_acc,origin_acc = retrain(model, args,layer_names,selectsize,operator,measure)
                     #print('%0.4f' % origin_acc, '%0.4f' % retrain_acc)
                     result_to_write+=str(round(retrain_acc,4))+('' if i==4 else ',')
                 result_to_write+='],\n'
