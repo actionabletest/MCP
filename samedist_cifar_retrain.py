@@ -36,22 +36,22 @@ def retrain(x_target,y_test,origin_acc,model,args,layer_names,selectsize=100,att
     target_lst=[]
 
 
-    if measure=='random':
+    if measure=='SRS':
         x_select,y_select = select_rondom(selectsize,x_target,x_target,y_test)
     if measure=='MCP':    
         x_select,y_select = select_my_optimize(model,selectsize,x_target,y_test)
-    if measure=='lsa':
+    if measure=='LSA':
         target_lst = fetch_lsa(model, x_train, x_target, attack, layer_names, args)
-    if measure=='dsa':
+    if measure=='DSA':
         target_lst = fetch_dsa(model, x_train, x_target, attack, layer_names, args)
 
-    if measure=='adaptive':
+    if measure=='AAL':
         path= "./cifar_finalResults/cifar_"+attack+"_compound8_result.csv"
         csv_data = pd.read_csv(path,header=None)
         target_lst =[]
         for i in range(len(csv_data.values.T)):
             target_lst.append(csv_data.values.T[i])
-    if measure=='conditional': 
+    if measure=='CES': 
         tmpfile="./conditional/"+attack+"_cifar_"+str(selectsize)+".npy"
         if os.path.exists(tmpfile):
             indexlst = list(np.load(tmpfile))
@@ -59,7 +59,7 @@ def retrain(x_target,y_test,origin_acc,model,args,layer_names,selectsize=100,att
             indexlst = condition.conditional_sample(model,x_target,selectsize)
             np.save(tmpfile,np.array(indexlst))
         x_select,y_select = select_from_index(selectsize,x_target,indexlst,y_test)
-    elif measure not in ['random','MCP']:
+    elif measure not in ['SRS','MCP']:
         x_select,y_select = select_from_large(selectsize, x_target, target_lst,y_test)
         
     y_select = np_utils.to_categorical(y_select, 10)
@@ -304,7 +304,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    baselines =['lsa','dsa','conditional','MCP','random','adaptive']
+    baselines =['LSA','DSA','CES','MCP','SRS','AAL']
     operators =['fgsm','jsma','bim-a','bim-b','cw-l2','scale','rotation','translation','shear','brightness','contrast']
 
     model_path='./model/densenet_cifar10.h5df'
