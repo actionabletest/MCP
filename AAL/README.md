@@ -1,5 +1,5 @@
 ## Introduction of the baseline implementation
-
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 paper：[《Adaptive Active Learning for Image Classification》](https://www.cv-foundation.org/openaccess/content_cvpr_2013/papers/Li_Adaptive_Active_Learning_2013_CVPR_paper.pdf)·   
 
 [code](https://astro.temple.edu/~tud51700/research.html) （code provided with the paper）（MATLAB code）
