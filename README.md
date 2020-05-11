@@ -33,7 +33,7 @@ CES. You can directly invoke the functions "conditional_sample" from "CES/condit
 
 
 
-AAL. This approach is written by Matlab. We have write a individual [README](https://github.com/actionabletest/MCP/blob/master/AAL/README.md) in the file "AAL" along with all the codes and our experimental setups and results. For short, you can run MATLAB programs and get the intermediate results stored in mnist_finalResults, cifar_finalResults, svhn_finalResults. Then you can run it in our python codes just as the other baseline methods.  [README](https://github.com/actionabletest/MCP/blob/master/AAL/README.md) 
+AAL. This approach is written by Matlab. We have write a individual [README](https://github.com/actionabletest/MCP/blob/master/AAL/README.md) in the file "AAL" along with all the codes and our experimental setups and results. For short, you can run MATLAB programs and get the intermediate results stored in mnist_finalResults, cifar_finalResults, svhn_finalResults. Then you can run it in our python codes just as the other baseline methods. 
 
 SRS. This method is implemented in the "samedist_***_retrain.py" as the function "select_rondom".
 
