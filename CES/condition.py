@@ -146,9 +146,9 @@ def selectsample(model, x_test, delta, iterate,neuron_interval,neuron_proba,test
     return max_index0
 
 
-def conditional_sample(model,x_test,sample,attack=0):
+def conditional_sample(model,x_test,sample_size,attack=0):
     delta = 5
-    iterate = int((sample - 30)/delta)
+    iterate = int((sample_size - 30)/delta)
     test_output = build_testoutput(model, x_test)
     neuron_interval, neuron_proba = build_neuron_tables(model, x_test, delta,test_output)
     #test_output = build_testoutput(model, x_test)
