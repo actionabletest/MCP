@@ -4,6 +4,7 @@ MCP(Multiple-Boundary Clustering and Prioritization)
 
 This repository stores our experimental codes and part of the simulated datasets for paper `Multiple-Boundary Clustering and Prioritization to Promote Neural Network Retraining'.
 
+##Dataset:
 Part of the datasets lies in the folder 'dataset'. Because some of our simulated test datasets exceed GitHub's file size limit of 100.00 MB, we can only upload part of our datasets in file '/mnist'. 
 
 The operational details of simulated test datasets are listed in the [README](https://github.com/actionabletest/MCP/blob/master/dataset/README.md) under the folder 'dataset'.
@@ -20,6 +21,7 @@ baselines =['MCP','LSA','DSA','CES','AAL','SRS']
 operators =['fgsm','jsma','bim-a','bim-b','cw-l2','scale','rotation','translation','shear','brightness','contrast']
 
 
+## Baseline methods
 MCP. Our method "MCP" is implemented in the "samedist_***_retrain.py" as the function "select_my_optimize".
 
 
