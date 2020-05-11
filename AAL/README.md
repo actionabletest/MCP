@@ -17,7 +17,9 @@ paper：[《Adaptive Active Learning for Image Classification》](https://www.cv
 1. We only compute **the Dense SIFT features** for different test sets. (mnist, cifar and svhn)
 2. For different test sets, we will **compute a 300 dimensional feature for each test input**, which is based on the Dense SIFT features. 
    1. note: we choose the 300 dimensional feature for each test input  according to the code provided by the author.
-3. For the adaptive combination between Uncertainty Measure and Information Density Measure  which can be seen from the formula 9 in Page 4 in the [paper](https://www.cv-foundation.org/openaccess/content_cvpr_2013/papers/Li_Adaptive_Active_Learning_2013_CVPR_paper.pdf) : ![](http://www.forkosh.com/mathtex.cgi? $$h_\beta(x_i)=f(x_i)^{\beta}*d(x_i)^{1-\beta}$$), where $\beta$ is a tradeoff controlling parameter over the two terms. We tested all the parameters $\beta$, from 0.1 to 0.9, and finally found that 0.5 is the best choice, so we chose 0.5 as the fixed parameter of this experiment.
+3. For the adaptive combination between Uncertainty Measure and Information Density Measure  which can be seen from the formula 9 in Page 4 in the [paper](https://www.cv-foundation.org/openaccess/content_cvpr_2013/papers/Li_Adaptive_Active_Learning_2013_CVPR_paper.pdf) : 
+![](http://chart.googleapis.com/chart?cht=tx&chl= $$h_\beta(x_i)=f(x_i)^{\beta}*d(x_i)^{1-\beta}$$)
+, where $\beta$ is a tradeoff controlling parameter over the two terms. We tested all the parameters $\beta$, from 0.1 to 0.9, and finally found that 0.5 is the best choice, so we chose 0.5 as the fixed parameter of this experiment.
 
 #### steps to reproduce（on windows）：
 
