@@ -17,7 +17,9 @@ samedist_mnist_retrain.py,
 samedist_cifar_retrain.py, 
 samedist_svhn_retrain.py. 
 You can modify the list variables 'baselines'(methods) and 'operators'(simulated dataset) to run what you prefer.
+
 baselines =['MCP','LSA','DSA','CES','AAL','SRS']
+
 operators =['fgsm','jsma','bim-a','bim-b','cw-l2','scale','rotation','translation','shear','brightness','contrast']
 
 
