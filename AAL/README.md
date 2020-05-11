@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## Introduction of the baseline implementation
 
 paper：[《Adaptive Active Learning for Image Classification》](https://www.cv-foundation.org/openaccess/content_cvpr_2013/papers/Li_Adaptive_Active_Learning_2013_CVPR_paper.pdf)·   
