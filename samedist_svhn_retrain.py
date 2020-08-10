@@ -350,7 +350,7 @@ if __name__ == "__main__":
     #print('Test Loss: %.4f' % score[0])
         print(operator)
         print('Before retrain, Test accuracy: %.4f'% origin_acc)
-        for measure in ['lsa','dsa','conditional','MCP','random','adaptive']:
+        for measure in ['LSA','DSA','CES','MCP','SRS','AAL']:
 
             layer_names= ['batch_normalization_16']
 
